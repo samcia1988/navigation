@@ -1,82 +1,86 @@
-import React from 'react';
-import { Table, Divider, Tag } from 'antd';
+import React, { Component } from 'react';
+import { Table, Tag } from 'antd';
+import { connect } from 'dva';
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
+function ThemeAction(props) {
+  if (props.name === props.currentTheme) {
+    return (
       <span>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
+        <a>已选主题</a>
       </span>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a>Invite {record.name}</a>
-        <Divider type="vertical" />
-        <a>Delete</a>
-      </span>
-    ),
-  },
-];
+    );
+  }
+  return (
+    <span>
+      <a>选择主题</a>
+    </span>
+  );
+}
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
+@connect(({ themeItems, themeProps }) => ({ themeItems, themeProps }))
+class ThemeTable extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'themeItems/fetch',
+      payload: {},
+    });
+    dispatch({
+      type: 'themeProps/fetch',
+      payload: {},
+    });
+  }
 
-export default () => (
-  <div id="components-table-demo-basic">
-    <Table columns={columns} dataSource={data} />
-  </div>
-);
+  componentDidUpdate() {
+    this.data = this.props.themeItems.items;
+    this.currentTheme = this.props.themeProps.name;
+    this.columns = [
+      {
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'key',
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '主题名称',
+        dataIndex: 'name',
+        key: 'name',
+      },
+      {
+        title: '标签',
+        key: 'tags',
+        dataIndex: 'tags',
+        render: tags => (
+          <span>
+            {tags.map(tag => {
+              let color = tag.length > 5 ? 'geekblue' : 'green';
+              if (tag === 'loser') {
+                color = 'volcano';
+              }
+              return (
+                <Tag color={color} key={tag}>
+                  {tag.toUpperCase()}
+                </Tag>
+              );
+            })}
+          </span>
+        ),
+      },
+      {
+        title: '操作',
+        key: 'action',
+        render: record => <ThemeAction name={record.name} currentTheme={this.currentTheme} />,
+      },
+    ];
+  }
+
+  render() {
+    return (
+      <div id="components-table-demo-basic">
+        <Table columns={this.columns} dataSource={this.data} />
+      </div>
+    );
+  }
+}
+
+export default ThemeTable;

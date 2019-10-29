@@ -1,5 +1,5 @@
 export default {
   'POST /api/getTheme': {
-    name: 'DefaultTheme',
+    name: '默认主题',
   },
 };

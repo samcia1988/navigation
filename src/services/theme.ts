@@ -1,12 +1,13 @@
 import request from '@/utils/request';
 
-export interface ThemeQueryParamsType {
-  username: string;
-}
-
-export async function getTheme(params: ThemeQueryParamsType) {
+export async function getTheme() {
   return request('/api/getTheme', {
     method: 'POST',
-    data: params,
+  });
+}
+
+export async function getThemeItems() {
+  return request('/api/getThemeItems', {
+    method: 'POST',
   });
 }
