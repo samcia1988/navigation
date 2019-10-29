@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
-import { Table, Tag } from 'antd';
+import { Table, Tag, Button } from 'antd';
 import { connect } from 'dva';
+
+function changeTheme(name, dispatchProps) {
+  const { dispatch } = dispatchProps;
+  dispatch({
+    type: 'themeProps/change',
+    payload: {
+      name,
+    },
+  });
+}
 
 function ThemeAction(props) {
   if (props.name === props.currentTheme) {
     return (
       <span>
-        <a>已选主题</a>
+        <Button type="primary" disabled>
+          已选主题
+        </Button>
       </span>
     );
   }
   return (
     <span>
-      <a>选择主题</a>
+      <Button type="primary" onClick={() => changeTheme(props.name, props.dispatch)}>
+        选择主题
+      </Button>
     </span>
   );
 }
@@ -38,7 +52,7 @@ class ThemeTable extends Component {
       {
         title: 'ID',
         dataIndex: 'id',
-        key: 'key',
+        key: 'id',
         render: text => <a>{text}</a>,
       },
       {
@@ -69,7 +83,9 @@ class ThemeTable extends Component {
       {
         title: '操作',
         key: 'action',
-        render: record => <ThemeAction name={record.name} currentTheme={this.currentTheme} />,
+        render: record => (
+          <ThemeAction name={record.name} currentTheme={this.currentTheme} dispatch={this.props} />
+        ),
       },
     ];
   }
@@ -77,7 +93,7 @@ class ThemeTable extends Component {
   render() {
     return (
       <div id="components-table-demo-basic">
-        <Table columns={this.columns} dataSource={this.data} />
+        <Table columns={this.columns} dataSource={this.data} rowKey="id" />
       </div>
     );
   }

@@ -11,3 +11,12 @@ export async function getThemeItems() {
     method: 'POST',
   });
 }
+
+export async function changeTheme(name: string) {
+  return request('/api/changeTheme', {
+    method: 'POST',
+    data: {
+      name,
+    },
+  });
+}

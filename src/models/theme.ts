@@ -1,4 +1,4 @@
-import { getTheme } from '@/services/theme';
+import { getTheme, changeTheme } from '@/services/theme';
 
 const ThemeProps = {
   namespace: 'themeProps',
@@ -13,9 +13,17 @@ const ThemeProps = {
         payload: response,
       });
     },
+    *change({ payload }, { call, put }) {
+      const response = yield call(changeTheme, payload);
+      yield put({
+        type: 'save',
+        payload: response,
+      });
+    },
   },
   reducers: {
     save(state, action) {
+      state.name = action.payload.name;
       return { ...state, ...action.payload };
     },
   },
