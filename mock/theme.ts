@@ -17,6 +17,6 @@ export default {
     ],
   },
   'POST /api/changeTheme': {
-    name: '默认主题',
+    changed: true,
   },
 };

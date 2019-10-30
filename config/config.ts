@@ -97,7 +97,7 @@ export default {
     },
     {
       path: '/',
-      component: '../layouts/SecurityLayout',
+      component: '../layouts/BlankLayout',
       routes: [
         {
           path: '/',
@@ -184,10 +184,10 @@ export default {
   chainWebpack: webpackPlugin,
   /*
   proxy: {
-    '/server/api/': {
-      target: 'https://preview.pro.ant.design/',
+    '/api/': {
+      target: 'http://easymock.theta-group.cn/mock/5db903265e84250016a1ed81/nari-antd',
       changeOrigin: true,
-      pathRewrite: { '^/server': '' },
+      pathRewrite: { '^/api': '' },
     },
   },
   */
