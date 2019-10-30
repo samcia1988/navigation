@@ -13,6 +13,7 @@ const ThemeProps = {
         type: 'save',
         payload: response,
       });
+      return response;
     },
     *change({ payload }, { call, put }) {
       const response = yield call(changeTheme, payload);

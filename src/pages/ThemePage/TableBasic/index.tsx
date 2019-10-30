@@ -14,6 +14,12 @@ class ThemeTable extends Component {
     dispatch({
       type: 'themeProps/fetch',
       payload: {},
+    }).then(resp => {
+      console.log(resp);
+      dispatch({
+        type: 'settings/changeSetting',
+        payload: ThemeVary[resp.name],
+      });
     });
   }
 
