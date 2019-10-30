@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Table, Tag, Button } from 'antd';
 import { connect } from 'dva';
+import ThemeVary from '@/pages/ThemeVary';
 
-@connect(({ themeItems, themeProps }) => ({ themeItems, themeProps }))
+@connect(({ themeItems, themeProps, settings }) => ({ themeItems, themeProps, settings }))
 class ThemeTable extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -25,6 +26,10 @@ class ThemeTable extends Component {
           name,
         },
       }).then(() => {
+        dispatch({
+          type: 'settings/changeSetting',
+          payload: ThemeVary[name],
+        });
         this.forceUpdate();
       });
     };
