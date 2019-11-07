@@ -1,23 +1,12 @@
-import { connect } from 'dva';
-import React, { Component } from 'react';
+import React from 'react';
 
 import TableBasic from './TableBasic';
 import styles from './index.less';
+import BasicPage from '@/components/BasicPage';
 
-@connect(({ themeProps }) => ({ themeProps }))
-class ThemePage extends Component {
-  constructor(props) {
-    super(props);
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'themeProps/fetch',
-      payload: {
-        username: 'ranger',
-      },
-    });
-  }
-
+class ThemePage extends BasicPage {
   render() {
+    // Nothing new
     return (
       <div className={styles.main}>
         <TableBasic />

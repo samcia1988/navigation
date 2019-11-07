@@ -1,6 +1,6 @@
 export default {
   'POST /api/getTheme': {
-    name: '绯红主题',
+    name: '默认主题',
   },
   'POST /api/getThemeItems': {
     items: [
