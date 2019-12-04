@@ -1,0 +1,18 @@
+export default {
+  '/api/config.json': {
+    systems: [
+      {
+        system: 'Webmin',
+        url: 'https://10.242.14.118:10000/',
+      },
+      {
+        system: 'AriaNg',
+        url: 'http://10.242.14.118/aria/',
+      },
+      {
+        system: 'JellyFin',
+        url: 'http://10.242.14.118:8096',
+      },
+    ],
+  },
+};

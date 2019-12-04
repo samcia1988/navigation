@@ -102,7 +102,6 @@ export default {
         {
           path: '/',
           component: '../layouts/BasicLayout',
-          authority: ['admin', 'user'],
           routes: [
             {
               path: '/',
@@ -113,12 +112,6 @@ export default {
               name: 'welcome',
               icon: 'smile',
               component: './Welcome',
-            },
-            {
-              path: '/theme',
-              name: 'ThemePage',
-              icon: 'smile',
-              component: './ThemePage',
             },
             {
               component: './404',
