@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+swagger:
+  enabled: true
+  title: Navigation
+  description: Swagger of Navigation
+  base-package: org.theta
+  base-path: /**
+  exclude-path:
+  - /error
+  - /ops/**
+  
