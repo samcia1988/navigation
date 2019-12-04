@@ -10,7 +10,7 @@ import ProLayout, {
   Settings,
   DefaultFooter,
 } from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'umi/link';
 import { Dispatch } from 'redux';
 import { connect } from 'dva';
@@ -101,21 +101,6 @@ const footerRender: BasicLayoutProps['footerRender'] = () => {
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const { dispatch, children, settings } = props;
-  /**
-   * constructor
-   */
-
-  useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchCurrent',
-      });
-      dispatch({
-        type: 'settings/getSetting',
-      });
-    }
-  }, []);
-
   /**
    * init variables
    */
