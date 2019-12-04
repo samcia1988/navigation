@@ -8,6 +8,5 @@ swagger:
   base-package: org.theta
   base-path: /**
   exclude-path:
-  - /error
-  - /ops/**
-  
+    - /error
+    - /ops/**
